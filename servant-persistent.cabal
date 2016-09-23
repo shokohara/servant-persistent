@@ -21,7 +21,7 @@ executable perservant
     main-is:
         Main.hs
     build-depends:
-        base >=4.7 && <4.9
+        base
       , servant-persistent 
       , persistent-postgresql
       , wai
@@ -44,7 +44,7 @@ library
       , Api
       , Api.User
     build-depends: 
-        base >= 4.7 && < 4.9
+        base
       , aeson
       , bytestring
       , monad-control
@@ -53,9 +53,9 @@ library
       , persistent
       , persistent-postgresql
       , persistent-template
-      , servant >= 0.7 && < 0.8
-      , servant-js >= 0.7 && < 0.8
-      , servant-server >= 0.7 && < 0.8
+      , servant
+      , servant-js
+      , servant-server
       , transformers
       , wai
       , wai-extra
