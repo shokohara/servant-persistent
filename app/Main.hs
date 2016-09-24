@@ -5,7 +5,7 @@ import           Network.Wai.Handler.Warp    (run)
 import           System.Environment          (lookupEnv)
 
 import           Api                         (app)
-import           Api.User                    (generateJavaScript)
+import           Api.Article                 (generateJavaScript)
 import           Config                      (Config (..), Environment (..),
                                               makePool, setLogger)
 import           Models                      (doMigrations)

@@ -23,7 +23,7 @@ import           GHC.Generics         (Generic)
 import           Config
 
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
-User json
+Article json
     name String
     email String
     deriving Show

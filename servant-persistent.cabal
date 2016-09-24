@@ -42,7 +42,7 @@ library
         Config
       , Models
       , Api
-      , Api.User
+      , Api.Article
     build-depends: 
         base
       , aeson

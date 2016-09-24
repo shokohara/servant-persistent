@@ -2,7 +2,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE TypeOperators              #-}
 
-module Api.User where
+module Api.Article where
 
 import           Control.Monad.Except
 import           Control.Monad.Reader        (ReaderT, runReaderT)
@@ -18,23 +18,23 @@ import           Config                      (App (..), Config (..))
 import           Models
 
 type UserAPI =
-         "users" :> Get '[JSON] [Entity User]
-    :<|> "users" :> Capture "name" String :> Get '[JSON] (Entity User)
-    :<|> "users" :> ReqBody '[JSON] User :> Post '[JSON] Int64
+         "articles" :> Get '[JSON] [Entity Article]
+    :<|> "articles" :> Capture "name" String :> Get '[JSON] (Entity Article)
+    :<|> "articles" :> ReqBody '[JSON] Article :> Post '[JSON] Int64
 
 -- | The server that runs the UserAPI
 userServer :: ServerT UserAPI App
 userServer = allUsers :<|> singleUser :<|> createUser
 
 -- | Returns all users in the database.
-allUsers :: App [Entity User]
+allUsers :: App [Entity Article]
 allUsers =
     runDb (selectList [] [])
 
 -- | Returns a user by name or throws a 404 error.
-singleUser :: String -> App (Entity User)
+singleUser :: String -> App (Entity Article)
 singleUser str = do
-    maybeUser <- runDb (selectFirst [UserName ==. str] [])
+    maybeUser <- runDb (selectFirst [ArticleName ==. str] [])
     case maybeUser of
          Nothing ->
             throwError err404
@@ -42,9 +42,9 @@ singleUser str = do
             return person
 
 -- | Creates a user in the database.
-createUser :: User -> App Int64
+createUser :: Article -> App Int64
 createUser p = do
-    newUser <- runDb (insert (User (userName p) (userEmail p)))
+    newUser <- runDb (insert (Article (articleName p) (articleEmail p)))
     return $ fromSqlKey newUser
 
 -- | Generates JavaScript to query the User API.

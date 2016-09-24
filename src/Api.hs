@@ -16,7 +16,7 @@ import           Servant
 import           Config                      (App (..), Config (..))
 import           Models
 
-import           Api.User
+import           Api.Article
 
 -- | This is the function we export to run our 'UserAPI'. Given
 -- a 'Config', we return a WAI 'Application' which any WAI compliant server
